@@ -1,0 +1,40 @@
+/* dosis-regular - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/dosis-v27-latin-regular.woff2') format('woff2'),
+    url('fonts/dosis-v27-latin-regular.woff') format('woff'),
+    url('fonts/dosis-v27-latin-regular.ttf') format('truetype');
+}
+
+/* dosis-600 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/dosis-v27-latin-600.woff2') format('woff2'),
+    url('fonts/dosis-v27-latin-600.woff') format('woff'),
+    url('fonts/dosis-v27-latin-600.ttf') format('truetype');
+}
+
+/* dosis-800 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 800;
+  src: url('fonts/dosis-v27-latin-800.woff2') format('woff2'),
+    url('fonts/dosis-v27-latin-800.woff') format('woff'),
+    url('fonts/dosis-v27-latin-800.ttf') format('truetype');
+}
+
+/* Default styles */
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: 'Dosis', sans-serif;
+}
