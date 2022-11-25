@@ -42,8 +42,9 @@ body {
 
 /* Global classes */
 .container {
-  width: 1400px;
+  max-width: 1400px;
   margin: 0px auto;
+  padding: 0px 16px;
 }
 
 /* Variables */

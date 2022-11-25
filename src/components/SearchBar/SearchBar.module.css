@@ -1,0 +1,44 @@
+.form {
+  margin-block: 16px;
+}
+
+.form__label {
+  display: block;
+  font-weight: bold;
+  font-size: var(--fs-md);
+
+  color: var(--purple);
+  margin-block-end: 8px;
+}
+
+.form__row {
+  display: flex;
+  align-items: stretch;
+}
+
+.form__input {
+  width: 100%;
+  background-color: var(--purple-pale);
+  color: var(--purple-light);
+
+  outline: 1px solid transparent;
+  padding: 24px 12px;
+  font-size: var(--fs-sm);
+  border: none;
+
+  border-radius: 12px 0px 0px 12px;
+}
+
+.form__input:focus,
+.form__input:focus + .form__submit {
+  outline: 2px solid var(--purple);
+}
+
+.form__submit {
+  outline: none;
+  border: none;
+  background-color: var(--purple);
+  padding: 0.4em 1.2em;
+
+  border-radius: 0px 12px 12px 0px;
+}
