@@ -31,10 +31,37 @@
 /* Default styles */
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
   margin: 0px;
   padding: 0px;
 }
 
 body {
   font-family: 'Dosis', sans-serif;
+}
+
+/* Global classes */
+.container {
+  width: 1400px;
+  margin: 0px auto;
+}
+
+/* Variables */
+:root {
+  --fs-sm: 1.2rem;
+  --fs-md: 1.4rem;
+  --fs-lg: 1.8rem;
+  --fs-giant: 2.8rem;
+
+  --purple-pale: #edeaf1;
+  --purple-light: #ab83c9;
+  --purple: #3f0f65;
+  --purple-dark: #2a0646;
+
+  --category-color-1: #eecc75;
+  --category-color-2: #ef9e9d;
+  --category-color-3: #cad297;
+  --category-color-4: #b8eac5;
+  --category-color-5: #a2eee4;
+  --category-color-6: #8ea2e9;
 }
