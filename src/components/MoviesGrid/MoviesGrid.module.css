@@ -4,3 +4,13 @@
   grid-template-columns: repeat(auto-fill, 340px);
   gap: 24px;
 }
+
+@media screen and (max-width: 576px) {
+  .movies--slider {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+}

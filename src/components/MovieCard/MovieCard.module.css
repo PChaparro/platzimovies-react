@@ -12,3 +12,10 @@
 .movie__image {
   object-fit: cover;
 }
+
+@media screen and (max-width: 576px) {
+  .movie--slider {
+    min-width: 240px;
+    scroll-snap-align: center;
+  }
+}

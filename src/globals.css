@@ -38,6 +38,7 @@
 
 body {
   font-family: 'Dosis', sans-serif;
+  padding-block-end: 16px;
 }
 
 /* Global classes */
@@ -45,6 +46,16 @@ body {
   max-width: 1400px;
   margin: 0px auto;
   padding: 0px 16px;
+}
+
+.section {
+  margin-block: 16px;
+}
+
+.section__title {
+  color: var(--purple);
+  font-size: var(--fs-lg);
+  margin-block: 24px;
 }
 
 /* Variables */

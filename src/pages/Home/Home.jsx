@@ -24,7 +24,14 @@ export const Home = () => {
     <>
       <HomeHero />
       <SearchBar />
-      <section>{<MoviesGrid movies={trendings} />}</section>
+      <section className='section container'>
+        {
+          <>
+            <h2 className='section__title'>Tendencias</h2>
+            <MoviesGrid movies={trendings} isSlider={true} />
+          </>
+        }
+      </section>
     </>
   );
 };
