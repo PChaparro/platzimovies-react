@@ -11,3 +11,7 @@ export const GetTrendingsService = async (page) => {
     return { success: false, movies: [] };
   }
 };
+
+export const GetCategoriesService = async () => {
+  return ['Action', 'Adventure', 'Romance', 'Musical', 'Comedy', 'Drama'];
+};

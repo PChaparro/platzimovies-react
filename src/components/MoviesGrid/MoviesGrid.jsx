@@ -1,6 +1,6 @@
 import Styles from './MoviesGrid.module.css';
 
-import { MovieCard } from '../MovieCard/MovieCard';
+import { MovieCard } from './MovieCard/MovieCard';
 
 export const MoviesGrid = ({ movies, isSlider }) => {
   return (
