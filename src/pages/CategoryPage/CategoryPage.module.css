@@ -1,0 +1,17 @@
+.category__header {
+  padding-block: 32px;
+  min-height: 120px;
+}
+
+.category__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block-end: 12px;
+}
+
+.category__color {
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 12px;
+}

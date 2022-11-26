@@ -23,9 +23,10 @@ export const Home = () => {
 
     const getCategories = async () => {
       const reply = await GetCategoriesService();
+      const { genres } = reply;
 
-      const enhancedCategories = reply.map((category) => {
-        return { category, color: randomColor() };
+      const enhancedCategories = genres.map((category) => {
+        return { id: category.id, category: category.name, color: randomColor() };
       });
 
       setCategories(enhancedCategories);

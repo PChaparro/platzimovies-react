@@ -20,7 +20,7 @@ export const Navbar = () => {
     <nav className={Styles['navbar-container']}>
       <div className={`${Styles.navbar} container`}>
         <NavLink to={'/'}>
-          <img className={Styles.navbar__image} src='images/vision-logo.svg' alt='Vision logo' />
+          <img className={Styles.navbar__image} src='/images/vision-logo.svg' alt='Vision logo' />
         </NavLink>
         <ul className={Styles.navbar__options} ref={options}>
           <li className={Styles.navbar__option}>
