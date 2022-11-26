@@ -34,7 +34,15 @@
   color: inherit;
 }
 
+.navbar__hamburger {
+  display: none;
+}
+
 @media screen and (max-width: 576px) {
+  .navbar__hamburger {
+    display: block;
+  }
+
   .navbar__options {
     position: absolute;
     top: -160px;

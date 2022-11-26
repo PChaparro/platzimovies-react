@@ -31,6 +31,7 @@ export const Navbar = () => {
           </li>
         </ul>
         <FiAlignRight
+          className={Styles.navbar__hamburger}
           size={'24px'}
           title={'Toggle mobile menu visibility'}
           onClick={toggleMenuVisitibility}
