@@ -5,6 +5,7 @@ import { GetCategoriesService, GetGenreService } from '../../services/movies.ser
 
 // Hooks
 import { useObserver } from '../../hooks/useObserver';
+import { useNotification } from '../../hooks/useNotification';
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,6 +13,8 @@ import randomColor from 'randomcolor';
 import Styles from './CategoryPage.module.css';
 
 export const CategoryPage = () => {
+  const { triggerErrorNotification } = useNotification();
+
   // Get the genre id from the url param
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,6 +46,7 @@ export const CategoryPage = () => {
 
         if (!current) {
           // Go to the home page if the genre was not found
+          triggerErrorNotification('Unable to find a category with the given id');
           navigate('/');
         } else {
           // Update the name and get a random color
