@@ -3,6 +3,8 @@ import { useState } from 'react';
 export const useObserver = (callback) => {
   const [observed, setObserved] = useState(null);
 
+  // Function to execute when the observed item is
+  // on the viewport
   const intersectionCallback = (entries, observer) => {
     entries.forEach(async (entry) => {
       const { isIntersecting } = entry;

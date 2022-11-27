@@ -36,7 +36,7 @@ export const SearchPage = () => {
     // Navigate (to update the url)
     navigate({ pathname: '/search', search: params.toString() });
 
-    // Reset values
+    // Update the criteria and start from first page again
     setCriteria(value);
     setPage(1);
   };
@@ -48,11 +48,12 @@ export const SearchPage = () => {
     setPage(page + 1);
   };
 
-  // Infinite scroll
+  // Infinite scroll satates
   const lastElement = useRef(null);
   const { observe } = useObserver(fetch);
 
-  // Effects
+  // Load new movies when page is loaded or criteria
+  // was changed
   useEffect(() => {
     const getMovies = async () => {
       await fetch(true);
@@ -61,9 +62,10 @@ export const SearchPage = () => {
     getMovies();
   }, [criteria]);
 
+  // Updated the observed item when new movies
+  // are added
   useEffect(() => {
     if (lastElement.current) {
-      // Change the observed element
       observe(lastElement.current);
     }
   }, [movies]);

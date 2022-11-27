@@ -12,10 +12,12 @@ import randomColor from 'randomcolor';
 import Styles from './CategoryPage.module.css';
 
 export const CategoryPage = () => {
+  // Get the genre id from the url param
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
 
+  // States
   const [color, setColor] = useState(location.color || '');
   const [name, setName] = useState(location.name || '');
   const [movies, setMovies] = useState([]);
@@ -39,16 +41,16 @@ export const CategoryPage = () => {
         const { genres } = await GetCategoriesService();
         const current = genres.filter((genre) => genre.id === parseInt(id))[0];
 
-        // Go to the home page if the genre was not found
         if (!current) {
+          // Go to the home page if the genre was not found
           navigate('/');
         } else {
+          // Update the name and get a random color
           setName(current.name);
           setColor(randomColor());
         }
       }
 
-      // Fetch the movies
       await fetch();
     };
 

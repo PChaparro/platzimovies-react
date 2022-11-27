@@ -17,6 +17,7 @@ export const Home = () => {
   const [trendings, setTrendings] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  // Go to the search page when the form is submitted
   const handleSearch = (value) => {
     navigate({ pathname: '/search', search: `criteria=${value}` });
   };
