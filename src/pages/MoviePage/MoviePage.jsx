@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { GetMovieService } from '../../services/movies.services';
+import { GetMovieService, GetSimilarsService } from '../../services/movies.services';
 
 import { MovieDetails } from '../../components/MovieDetails/MovieDetails';
 import randomColor from 'randomcolor';
@@ -8,8 +8,10 @@ import randomColor from 'randomcolor';
 export const MoviePage = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+  const [similars, setSimilars] = useState([]);
 
-  useEffect(() => {
+  // Get movie details and related movies
+  const load = () => {
     const getMovieDetails = async () => {
       const details = await GetMovieService(id);
 
@@ -21,8 +23,22 @@ export const MoviePage = () => {
       setMovie(details.movie);
     };
 
+    const getSimilars = async () => {
+      const similars = await GetSimilarsService(id);
+      setSimilars(similars.movies);
+    };
+
     getMovieDetails();
+    getSimilars();
+  };
+
+  useEffect(() => {
+    load();
+  }, [id]);
+
+  useEffect(() => {
+    load();
   }, []);
 
-  return <MovieDetails movie={movie} />;
+  return <MovieDetails movie={movie} similars={similars} />;
 };

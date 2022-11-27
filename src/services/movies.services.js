@@ -54,3 +54,14 @@ export const GetMovieService = async (id) => {
     return { success: false, movie: {} };
   }
 };
+
+export const GetSimilarsService = async (id) => {
+  try {
+    const reply = await axios.get(
+      `${CONFIG.API_BASE}/movie/${id}/similar?api_key=${CONFIG.API_KEY}`,
+    );
+    return { success: true, movies: reply.data.results };
+  } catch {
+    return { success: false, movies: {} };
+  }
+};
