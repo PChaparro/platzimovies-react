@@ -3,18 +3,18 @@ import { SessionContext } from '../../context/sessionContext';
 
 import { MoviesGrid } from '.././../components/MoviesGrid/MoviesGrid';
 import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useNotification } from '../../hooks/useNotification';
 
 export const FavoritesPage = () => {
-  const navigate = useNavigate();
   const { triggerWarningNotification } = useNotification();
 
   const { favorites } = useContext(SessionContext);
 
   if (favorites.length === 0) {
+    // Redirect to the home page if the user doesn't have favorites
     triggerWarningNotification('You have not favorites yet');
-    return navigate('/');
+    return <Navigate to={'/'} />;
   }
 
   return (

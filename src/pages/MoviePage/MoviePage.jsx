@@ -45,9 +45,5 @@ export const MoviePage = () => {
     load();
   }, [id]);
 
-  useEffect(() => {
-    load();
-  }, []);
-
   return <MovieDetails movie={movie} similars={similars} />;
 };
