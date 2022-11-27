@@ -6,6 +6,7 @@ export const CategoryCard = ({ category }) => {
   return (
     <Link
       className={Styles.category}
+      aria-label={`Discover ${category.category} movies`}
       to={`/category/${category.id}`}
       state={{ name: category.category, color: category.color }}
     >
