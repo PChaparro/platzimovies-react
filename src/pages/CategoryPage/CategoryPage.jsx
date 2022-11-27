@@ -27,18 +27,7 @@ export const CategoryPage = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  // Intersection trigger
-  const intersectedCallback = (entries, observer) => {
-    entries.forEach(async (entry) => {
-      const { isIntersecting } = entry;
-
-      if (isIntersecting) {
-        await fetch();
-      }
-    });
-  };
-
-  const { observe } = useObserver(intersectedCallback);
+  const { observe } = useObserver(fetch);
 
   // Get movies on load
   useEffect(() => {

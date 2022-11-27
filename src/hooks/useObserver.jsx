@@ -2,7 +2,18 @@ import { useState } from 'react';
 
 export const useObserver = (callback) => {
   const [observed, setObserved] = useState(null);
-  const observer = new IntersectionObserver(callback, { threshold: 1 });
+
+  const intersectionCallback = (entries, observer) => {
+    entries.forEach(async (entry) => {
+      const { isIntersecting } = entry;
+
+      if (isIntersecting) {
+        await callback();
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(intersectionCallback, { threshold: 1 });
 
   const observe = (element) => {
     if (observed) {
