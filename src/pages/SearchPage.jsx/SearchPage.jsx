@@ -9,6 +9,7 @@ import { useObserver } from '../../hooks/useObserver';
 import { MoviesGrid } from '../../components/MoviesGrid/MoviesGrid';
 import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { Loader } from '../../components/Loader/Loader';
 
 export const SearchPage = () => {
   // Get the current query param as needed
@@ -17,6 +18,7 @@ export const SearchPage = () => {
   const { search } = location;
 
   // States
+  const [loading, setLoading] = useState(true);
   const [criteria, setCriteria] = useState(new URLSearchParams(search).get('criteria'));
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
@@ -43,9 +45,11 @@ export const SearchPage = () => {
 
   // Function to get a new movies page
   const fetch = async (reset) => {
+    setLoading(true);
     const reply = await SearchMoviesService(criteria, page);
     reset ? setMovies([...reply.movies]) : setMovies([...movies, ...reply.movies]);
     setPage(page + 1);
+    setLoading(false);
   };
 
   // Infinite scroll satates
@@ -86,6 +90,7 @@ export const SearchPage = () => {
           );
         })}
       </MoviesGrid>
+      {loading && <Loader />}
     </main>
   );
 };
