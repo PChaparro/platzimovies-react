@@ -1,21 +1,23 @@
 // Components
 import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
 import { MoviesGrid } from '../../components/MoviesGrid/MoviesGrid';
-import { GetGenreService } from '../../services/movies.services';
+import { GetCategoriesService, GetGenreService } from '../../services/movies.services';
 
 // Hooks
 import { useObserver } from '../../hooks/useObserver';
 import { useEffect, useState, useRef } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
+import randomColor from 'randomcolor';
 import Styles from './CategoryPage.module.css';
 
 export const CategoryPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-
   const { id } = useParams();
-  const { name, color } = location.state;
 
+  const [color, setColor] = useState(location.color || '');
+  const [name, setName] = useState(location.name || '');
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const lastElement = useRef(null);
@@ -32,6 +34,21 @@ export const CategoryPage = () => {
   // Get movies on load
   useEffect(() => {
     const getMovies = async () => {
+      if (!name) {
+        // Get the genre and color if the page was loaded from the url
+        const { genres } = await GetCategoriesService();
+        const current = genres.filter((genre) => genre.id === parseInt(id))[0];
+
+        // Go to the home page if the genre was not found
+        if (!current) {
+          navigate('/');
+        } else {
+          setName(current.name);
+          setColor(randomColor());
+        }
+      }
+
+      // Fetch the movies
       await fetch();
     };
 
