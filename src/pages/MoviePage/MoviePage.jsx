@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNotification } from '../../hooks/useNotification';
 import { GetMovieService, GetSimilarsService } from '../../services/movies.services';
 
+import { Loader } from '.././../components/Loader/Loader';
 import { MovieDetails } from '../../components/MovieDetails/MovieDetails';
 import randomColor from 'randomcolor';
 
@@ -12,6 +13,8 @@ export const MoviePage = () => {
 
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+
+  const [loading, setLoading] = useState(true);
   const [similars, setSimilars] = useState([]);
 
   // Get movie details and related movies
@@ -39,11 +42,14 @@ export const MoviePage = () => {
 
     getMovieDetails();
     getSimilars();
+    setLoading(false);
   };
 
   useEffect(() => {
     load();
   }, [id]);
 
-  return <MovieDetails movie={movie} similars={similars} />;
+  {
+    return loading ? <Loader /> : <MovieDetails movie={movie} similars={similars} />;
+  }
 };

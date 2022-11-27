@@ -1,6 +1,7 @@
 // Components
 import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
 import { MoviesGrid } from '../../components/MoviesGrid/MoviesGrid';
+import { Loader } from '../../components/Loader/Loader';
 
 // Services
 import { GetTrendingsService } from '../../services/movies.services';
@@ -11,15 +12,18 @@ import { useEffect, useState, useRef } from 'react';
 
 export const TrendingsPage = () => {
   // States
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const lastElement = useRef(null);
 
   // Function to get a new movies page
   const fetch = async () => {
+    setLoading(true);
     const page = await GetTrendingsService(currentPage);
     setMovies([...movies, ...page.movies]);
     setCurrentPage(currentPage + 1);
+    setLoading(false);
   };
 
   const { observe } = useObserver(fetch);
@@ -52,6 +56,7 @@ export const TrendingsPage = () => {
           );
         })}
       </MoviesGrid>
+      {loading && <Loader />}
     </main>
   );
 };

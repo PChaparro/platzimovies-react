@@ -11,10 +11,15 @@ import randomColor from 'randomcolor';
 import { GetTrendingsService, GetCategoriesService } from '../../services/movies.services';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '../../components/Loader/Loader';
 
 export const Home = () => {
   const navigate = useNavigate();
+
+  const [loadingTrendings, setLoadingTrendings] = useState(true);
   const [trendings, setTrendings] = useState([]);
+
+  const [loadingCategories, setLoadingCategories] = useState(true);
   const [categories, setCategories] = useState([]);
 
   // Go to the search page when the form is submitted
@@ -27,6 +32,7 @@ export const Home = () => {
     const getTrendings = async () => {
       const reply = await GetTrendingsService(1);
       setTrendings(reply.movies);
+      setLoadingTrendings(false);
     };
 
     const getCategories = async () => {
@@ -38,6 +44,7 @@ export const Home = () => {
       });
 
       setCategories(enhancedCategories);
+      setLoadingCategories(false);
     };
 
     getTrendings();
@@ -53,18 +60,22 @@ export const Home = () => {
           <>
             <h2 className='section__title'>Tendencias</h2>
 
-            <MoviesGrid isSlider={true}>
-              {trendings.map((movie, index) => {
-                return (
-                  <MovieCard
-                    key={`trendings-${index}`}
-                    movie={movie}
-                    lazy={index >= 3 ? true : false}
-                    isSlider={true}
-                  />
-                );
-              })}
-            </MoviesGrid>
+            {loadingTrendings ? (
+              <Loader />
+            ) : (
+              <MoviesGrid isSlider={true}>
+                {trendings.map((movie, index) => {
+                  return (
+                    <MovieCard
+                      key={`trendings-${index}`}
+                      movie={movie}
+                      lazy={index >= 3 ? true : false}
+                      isSlider={true}
+                    />
+                  );
+                })}
+              </MoviesGrid>
+            )}
           </>
         }
       </section>
@@ -74,7 +85,7 @@ export const Home = () => {
             <h2 className='section__title' id='categories'>
               Categorias
             </h2>
-            <CategoriesGrid categories={categories} />
+            {loadingCategories ? <Loader /> : <CategoriesGrid categories={categories} />}
           </>
         }
       </section>
