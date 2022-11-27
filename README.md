@@ -1,6 +1,6 @@
 # platzimovies-react
 
-Challenge from the course: **Curso de React.js: Navegación con React Router**. 
+Challenge from the course: **Curso de React.js: Navegación con React Router**.
 
 ## Deploy
 
@@ -44,9 +44,16 @@ Movie details page:
 pnpm i
 ```
 
-2. Run
+2. Create a `.env` file on the root directory with the following fields:
 
-Run **deploy / static preview**: 
+```
+VITE_API_BASE=https://api.themoviedb.org/3
+VITE_API_KEY=your_key
+```
+
+3. Run
+
+Run **deploy / static preview**:
 
 ```bash
 pnpm run build
