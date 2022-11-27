@@ -10,13 +10,19 @@ import randomColor from 'randomcolor';
 
 import { GetTrendingsService, GetCategoriesService } from '../../services/movies.services';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+  const navigate = useNavigate();
   const [trendings, setTrendings] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const handleSearch = (value) => {
+    navigate({ pathname: '/search', search: `criteria=${value}` });
+  };
+
+  // Get movies and genres
   useEffect(() => {
-    // Trending movies
     const getTrendings = async () => {
       const reply = await GetTrendingsService(1);
       setTrendings(reply.movies);
@@ -40,7 +46,7 @@ export const Home = () => {
   return (
     <>
       <HomeHero />
-      <SearchBar />
+      <SearchBar callback={handleSearch} />
       <section className='section container'>
         {
           <>

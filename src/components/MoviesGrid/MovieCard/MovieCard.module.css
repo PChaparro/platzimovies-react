@@ -10,6 +10,7 @@
 }
 
 .movie__image {
+  min-height: 360px;
   object-fit: cover;
 }
 

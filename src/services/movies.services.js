@@ -33,3 +33,15 @@ export const GetGenreService = async (genre, page) => {
     return { success: false, movies: [] };
   }
 };
+
+export const SearchMoviesService = async (criteria, page) => {
+  try {
+    const reply = await axios.get(
+      `${CONFIG.API_BASE}/search/movie?api_key=${CONFIG.API_KEY}&query=${criteria}&page=${page}`,
+    );
+
+    return { success: true, movies: reply.data.results };
+  } catch {
+    return { success: false, movies: [] };
+  }
+};
