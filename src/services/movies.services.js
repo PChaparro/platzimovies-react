@@ -45,3 +45,12 @@ export const SearchMoviesService = async (criteria, page) => {
     return { success: false, movies: [] };
   }
 };
+
+export const GetMovieService = async (id) => {
+  try {
+    const reply = await axios.get(`${CONFIG.API_BASE}/movie/${id}?api_key=${CONFIG.API_KEY}`);
+    return { success: true, movie: reply.data };
+  } catch {
+    return { success: false, movie: {} };
+  }
+};
