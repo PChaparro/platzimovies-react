@@ -1,0 +1,14 @@
+.movie__heart {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+
+  display: grid;
+  place-content: center;
+
+  padding: 0.6em;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Components
 import { Navbar } from './components/Navbar/Navbar';
+import { SessionContextProvider } from './context/sessionContext';
 
 // Pages
 
@@ -16,15 +17,17 @@ import { TrendingsPage } from './pages/TrendingsPage/TrendingsPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/trendings' element={<TrendingsPage />}></Route>
-        <Route path='/search' element={<SearchPage />}></Route>
-        <Route path='/category/:id' element={<CategoryPage />}></Route>
-        <Route path='/movie/:id' element={<MoviePage />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <SessionContextProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/trendings' element={<TrendingsPage />}></Route>
+          <Route path='/search' element={<SearchPage />}></Route>
+          <Route path='/category/:id' element={<CategoryPage />}></Route>
+          <Route path='/movie/:id' element={<MoviePage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </SessionContextProvider>
   </React.StrictMode>,
 );

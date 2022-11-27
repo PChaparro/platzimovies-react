@@ -5,6 +5,10 @@
   margin-block: 16px;
 }
 
+.movie__poster-container {
+  position: relative;
+}
+
 .movie__poster {
   width: 100%;
 }
