@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
 import { MoviesGrid } from '../../components/MoviesGrid/MoviesGrid';
 import { GetGenreService } from '../../services/movies.services';
 
+import { useObserver } from '../../hooks/useObserver';
 import Styles from './CategoryPage.module.css';
 
 export const CategoryPage = () => {
@@ -13,7 +14,21 @@ export const CategoryPage = () => {
   const { name, color } = location.state;
 
   // Last element for intersection observer
-  const [last, setLast] = useState(null);
+  const lastElement = useRef(null);
+
+  const intersectedCallback = (entries, observer) => {
+    entries.forEach(async (entry) => {
+      const { isIntersecting } = entry;
+      if (isIntersecting) {
+        const page = await GetGenreService(id, currentPage);
+        // console.table(page.movies);
+        setMovies([...movies, ...page.movies]);
+        setCurrentPage(currentPage + 1);
+      }
+    });
+  };
+  const { observe } = useObserver(intersectedCallback);
+
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,10 +37,17 @@ export const CategoryPage = () => {
     const getMovies = async () => {
       const movies = await GetGenreService(id, currentPage);
       setMovies(movies.movies);
+      setCurrentPage(currentPage + 1);
     };
 
     getMovies();
   }, []);
+
+  useEffect(() => {
+    if (lastElement.current) {
+      observe(lastElement.current);
+    }
+  }, [movies]);
 
   return (
     <main>
@@ -47,6 +69,7 @@ export const CategoryPage = () => {
               movie={movie}
               lazy={index >= 3 ? true : false}
               isSlider={false}
+              ref={index === movies.length - 1 ? lastElement : null}
             />
           );
         })}

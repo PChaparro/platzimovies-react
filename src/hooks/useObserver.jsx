@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useObserver = ({ callback }) => {
+export const useObserver = (callback) => {
   const [observed, setObserved] = useState(null);
   const observer = new IntersectionObserver(callback, { threshold: 1 });
 
@@ -12,6 +12,7 @@ export const useObserver = ({ callback }) => {
 
     // Observe the new element
     observer.observe(element);
+    setObserved(element);
   };
 
   return {
