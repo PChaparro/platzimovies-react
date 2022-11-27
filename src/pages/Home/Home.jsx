@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { HomeHero } from '../../components/HomeHero/HomeHero';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { MoviesGrid } from '../../components/MoviesGrid/MoviesGrid';
+import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
 import { CategoriesGrid } from '../../components/CategoriesGrid/CategoriesGrid';
 
 import randomColor from 'randomcolor';
@@ -44,7 +45,19 @@ export const Home = () => {
         {
           <>
             <h2 className='section__title'>Tendencias</h2>
-            <MoviesGrid movies={trendings} isSlider={true} />
+
+            <MoviesGrid isSlider={true}>
+              {trendings.map((movie, index) => {
+                return (
+                  <MovieCard
+                    key={`trendings-${index}`}
+                    movie={movie}
+                    lazy={index >= 3 ? true : false}
+                    isSlider={true}
+                  />
+                );
+              })}
+            </MoviesGrid>
           </>
         }
       </section>
