@@ -1,34 +1,4 @@
 [[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/trendings"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/search"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/favorites"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/category"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/movie"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 404
+  status = 200
