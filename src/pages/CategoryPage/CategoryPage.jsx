@@ -11,6 +11,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 import randomColor from 'randomcolor';
 import Styles from './CategoryPage.module.css';
+import { Loader } from '../../components/Loader/Loader';
 
 export const CategoryPage = () => {
   const { triggerErrorNotification } = useNotification();
@@ -21,17 +22,20 @@ export const CategoryPage = () => {
   const { id } = useParams();
 
   // States
-  const [color, setColor] = useState(location.color || '');
-  const [name, setName] = useState(location.name || '');
+  const [loading, setLoading] = useState(false);
+  const [color, setColor] = useState(location.state?.color || '');
+  const [name, setName] = useState(location.state?.name || '');
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const lastElement = useRef(null);
 
   // Function to get a new movies page
   const fetch = async () => {
+    setLoading(true);
     const page = await GetGenreService(id, currentPage);
     setMovies([...movies, ...page.movies]);
     setCurrentPage(currentPage + 1);
+    setLoading(false);
   };
 
   const { observe } = useObserver(fetch);
@@ -93,6 +97,7 @@ export const CategoryPage = () => {
           );
         })}
       </MoviesGrid>
+      {loading && <Loader />}
     </main>
   );
 };
