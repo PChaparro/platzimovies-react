@@ -33,7 +33,7 @@ export const MovieDetails = ({ movie, similars }) => {
             <FavoriteIcon
               isFavorite={isFavorite}
               callback={() => {
-                addFavorite({ id: movie.id });
+                addFavorite({ id: movie.id, title: movie.title, poster_path: movie.poster_path });
               }}
             />
           )}

@@ -22,7 +22,11 @@ export const MovieCard = forwardRef((props, ref) => {
         <FavoriteIcon
           isFavorite={isFavorite}
           callback={() => {
-            addFavorite({ id: props.movie.id });
+            addFavorite({
+              id: props.movie.id,
+              title: props.movie.title,
+              poster_path: props.movie.poster_path,
+            });
           }}
         />
       )}

@@ -27,7 +27,7 @@ export const Navbar = () => {
             <NavLink to={'/trendings'}>Trendings</NavLink>
           </li>
           <li className={Styles.navbar__option}>
-            <NavLink to={'/'}>Saved</NavLink>
+            <NavLink to={'/favorites'}>Favorites</NavLink>
           </li>
         </ul>
         <FiAlignRight

@@ -10,6 +10,7 @@ import { SessionContextProvider } from './context/sessionContext';
 
 import './globals.css';
 import { CategoryPage } from './pages/CategoryPage/CategoryPage';
+import { FavoritesPage } from './pages/FavoritesPage/FavoritesPage';
 import { Home } from './pages/Home/Home';
 import { MoviePage } from './pages/MoviePage/MoviePage';
 import { SearchPage } from './pages/SearchPage.jsx/SearchPage';
@@ -21,11 +22,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/trendings' element={<TrendingsPage />}></Route>
-          <Route path='/search' element={<SearchPage />}></Route>
-          <Route path='/category/:id' element={<CategoryPage />}></Route>
-          <Route path='/movie/:id' element={<MoviePage />}></Route>
+          <Route path='/' element={<Home />} />
+          <Route path='/trendings' element={<TrendingsPage />} />
+          <Route path='/search' element={<SearchPage />} />
+          <Route path='/category/:id' element={<CategoryPage />} />
+          <Route path='/movie/:id' element={<MoviePage />} />
+          <Route path='/favorites' element={<FavoritesPage />} />
         </Routes>
       </BrowserRouter>
     </SessionContextProvider>
