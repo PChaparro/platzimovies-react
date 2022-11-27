@@ -1,10 +1,13 @@
-import { useEffect, useState, useRef } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+// Components
 import { MovieCard } from '../../components/MoviesGrid/MovieCard/MovieCard';
 import { MoviesGrid } from '../../components/MoviesGrid/MoviesGrid';
 import { GetGenreService } from '../../services/movies.services';
 
+// Hooks
 import { useObserver } from '../../hooks/useObserver';
+import { useEffect, useState, useRef } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+
 import Styles from './CategoryPage.module.css';
 
 export const CategoryPage = () => {
@@ -13,31 +16,34 @@ export const CategoryPage = () => {
   const { id } = useParams();
   const { name, color } = location.state;
 
-  // Last element for intersection observer
+  const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const lastElement = useRef(null);
 
+  // Function to get a new movies page
+  const fetch = async () => {
+    const page = await GetGenreService(id, currentPage);
+    setMovies([...movies, ...page.movies]);
+    setCurrentPage(currentPage + 1);
+  };
+
+  // Intersection trigger
   const intersectedCallback = (entries, observer) => {
     entries.forEach(async (entry) => {
       const { isIntersecting } = entry;
+
       if (isIntersecting) {
-        const page = await GetGenreService(id, currentPage);
-        // console.table(page.movies);
-        setMovies([...movies, ...page.movies]);
-        setCurrentPage(currentPage + 1);
+        await fetch();
       }
     });
   };
-  const { observe } = useObserver(intersectedCallback);
 
-  const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { observe } = useObserver(intersectedCallback);
 
   // Get movies on load
   useEffect(() => {
     const getMovies = async () => {
-      const movies = await GetGenreService(id, currentPage);
-      setMovies(movies.movies);
-      setCurrentPage(currentPage + 1);
+      await fetch();
     };
 
     getMovies();
@@ -45,6 +51,7 @@ export const CategoryPage = () => {
 
   useEffect(() => {
     if (lastElement.current) {
+      // Change the observed element
       observe(lastElement.current);
     }
   }, [movies]);
